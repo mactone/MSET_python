@@ -10,9 +10,13 @@ z=4
 
 #加载训练数据，默认进行归一化
 def Traindata(name_list,if_nor=True):
+    '''
+    name_list: datas in np.array form
+    '''
     np_D = np.zeros((1, column_num))
     for i in range(len(name_list)):
-        dict_obj = io.loadmat(name_list[i])
+#         dict_obj = io.loadmat(name_list[i])
+        dict_obj=name_list[i]   # mactone
         temp = dict_obj['ae_D']
         np_D = np.vstack((np_D, temp))
     np_D = np.delete(np_D, 0, axis=0)
@@ -30,7 +34,8 @@ def Traindata(name_list,if_nor=True):
 
 #加载测试数据，默认进行归一化
 def Testdata(name_string,np_Dmax,np_Dmin,if_nor=True):
-    dict_obj = io.loadmat(name_string)
+#     dict_obj = io.loadmat(name_string)
+    dict_obj=name_string #mactone
     np_Kobs = dict_obj['ae_Kobs2']
     np_Kobs = np_Kobs[:, 4:]
     if if_nor:
